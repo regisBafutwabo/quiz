@@ -1,15 +1,21 @@
-import "./App.css";
+import { Route, Routes } from "react-router-dom";
 
-import { Helmet } from "react-helmet-async";
+import { StandardTemplate } from "../components/templates/Standard/Standard";
+import { Error } from "../pages/Error";
+import { Home } from "../pages/Home";
+import { Quiz } from "../pages/Quiz";
+import { Result } from "../pages/Result";
 
 function App() {
   return (
-    <>
-      <Helmet>
-        <title>퀴즈</title>
-      </Helmet>
-      <div className="App"></div>
-    </>
+    <StandardTemplate>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/result" element={<Result />} />
+        <Route path="*" element={<Error type="404" />} errorElement={<Error type="404" />} />
+      </Routes>
+    </StandardTemplate>
   );
 }
 

@@ -7,7 +7,7 @@ export const Result = () => {
       <Helmet>
         <title>귀즈 - Results</title>
       </Helmet>
-      ;<h1>Result Page</h1>
+      <h1>Result Page</h1>
       <p>
         <Link to={"/"}>Home</Link>
       </p>

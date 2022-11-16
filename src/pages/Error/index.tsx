@@ -13,7 +13,7 @@ export const Error = ({ type }: ErrorProps) => {
     <>
       {type === "404" && (
         <>
-          <h2>OOps page not found!!</h2>
+          <h2>Oops page not found!!</h2>
           <button onClick={goBack}>Back</button>
         </>
       )}

@@ -4,38 +4,15 @@ import React from "react";
 
 import ReactDOM from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { StandardTemplate } from "./components/templates/Standard/Standard";
-import { Error } from "./pages/Error";
-import { Home } from "./pages/Home";
-import { Quiz } from "./pages/Quiz";
-import { Result } from "./pages/Result";
+import App from "./app/App";
 import reportWebVitals from "./reportWebVitals";
-import { QuizService } from "./services/Quiz/Quiz.service";
-
-const router = createBrowserRouter([
-  {
-    path: "/build",
-    element: <Home />,
-    loader: QuizService.getCategories,
-    errorElement: <Error type="404" />,
-  },
-  {
-    path: "/quiz/:id",
-    element: <Quiz />,
-  },
-  { path: "/result", element: <Result /> },
-  { path: "*", element: <Error type="404" /> },
-]);
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <React.StrictMode>
     <HelmetProvider>
-      <StandardTemplate>
-        <RouterProvider router={router} />;
-      </StandardTemplate>
+      <App />
     </HelmetProvider>
   </React.StrictMode>
 );

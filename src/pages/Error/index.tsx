@@ -8,6 +8,7 @@ export const Error = ({ type }: ErrorProps) => {
   const goBack = () => {
     navigate(-1);
   };
+
   return (
     <>
       {type === "404" && (

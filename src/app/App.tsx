@@ -7,20 +7,23 @@ import { Quiz } from "../pages/Quiz";
 import { Result } from "../pages/Result";
 import { QuizService } from "../services/Quiz/Quiz.service";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-    loader: QuizService.getCategories,
-    errorElement: <Error type="404" />,
-  },
-  {
-    path: "/quiz/:id",
-    element: <Quiz />,
-  },
-  { path: "/result", element: <Result /> },
-  // { path: "*", element: <Error type="404" /> },
-]);
+const router = createBrowserRouter(
+  [
+    {
+      path: "/build",
+      element: <Home />,
+      loader: QuizService.getCategories,
+      errorElement: <Error type="404" />,
+    },
+    {
+      path: "/quiz/:id",
+      element: <Quiz />,
+    },
+    { path: "/result", element: <Result /> },
+    { path: "*", element: <Error type="404" /> },
+  ],
+  { basename: "/" }
+);
 
 function App() {
   return (

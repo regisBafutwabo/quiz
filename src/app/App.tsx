@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     element: <Quiz />,
   },
   { path: "/result", element: <Result /> },
-  { path: "*", element: <Error type="404" /> },
+  { path: "*", element: <Error type="404" />, errorElement: <Error type="404" /> },
 ]);
 
 function App() {

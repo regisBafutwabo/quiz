@@ -13,13 +13,15 @@ const router = createBrowserRouter(
       path: "/",
       element: <Home />,
       loader: QuizService.getCategories,
+      errorElement: <Error type="404" />,
     },
     {
       path: "/quiz/:id",
       element: <Quiz />,
+      errorElement: <Error type="404" />,
     },
-    { path: "/result", element: <Result /> },
-    { path: "*", errorElement: <Error type="404" /> },
+    { path: "/result", element: <Result />, errorElement: <Error type="404" /> },
+    { path: "*", element: <Error type="404" /> },
   ],
   { basename: "/" }
 );

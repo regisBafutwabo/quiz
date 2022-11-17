@@ -1,19 +1,28 @@
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
+
+import { CategoryCard } from "../../components/molecules/CategoryCard";
+import { CategoryType } from "../../typings/trivia";
 
 export const Home = () => {
+  const loadedData = useLoaderData() as { categories: CategoryType[] };
+
   return (
     <>
       <Helmet>
         <title>귀즈 - Home</title>
       </Helmet>
-      <h1>Home</h1>
-      <p>
-        <Link to={"/quiz"}>Quiz</Link>
-      </p>
-      <p>
-        <Link to={"/result"}>Results</Link>
-      </p>
+      <p className="text-pink- text-4xl font-bold text-pink-400">{`Let's Play`}</p>
+      <div className="mt-4 flex-col justify-around px-4">
+        {loadedData?.categories &&
+          loadedData.categories?.map((category) => (
+            <CategoryCard
+              name={category.name}
+              categoryId={category.id}
+              key={category.id}
+            />
+          ))}
+      </div>
     </>
   );
 };

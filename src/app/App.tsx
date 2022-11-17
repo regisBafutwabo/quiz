@@ -20,7 +20,11 @@ const router = createBrowserRouter(
       element: <Quiz />,
       errorElement: <Error type="404" />,
     },
-    { path: "/result", element: <Result />, errorElement: <Error type="404" /> },
+    {
+      path: "/result",
+      element: <Result />,
+      errorElement: <Error type="404" />,
+    },
     { path: "*", element: <Error type="404" /> },
   ],
   { basename: "/" }

@@ -42,7 +42,9 @@ export const Quiz = () => {
       </Helmet>
       <ul>
         {questions.map((question) => (
-          <li key={question.question}>{decodeURIComponent(question.question)}</li>
+          <li key={question.question}>
+            {decodeURIComponent(question.question)}
+          </li>
         ))}
       </ul>
     </>

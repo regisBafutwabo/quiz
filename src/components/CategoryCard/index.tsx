@@ -41,7 +41,7 @@ export const CategoryCard = ({ categoryId, name }: CategoryCardProps) => {
             Difficulty
           </label>
           <select
-            className="block w-full rounded-lg  bg-gray-50 p-2.5 text-sm text-gray-900 focus-visible:outline-none"
+            className="block w-full rounded-lg  bg-gray-50 p-2.5 text-sm text-gray-900 focus-visible:outline-none max-sm:p-3"
             defaultValue={difficultyType}
             onChange={handleDifficultyChange}>
             {DIFFICULTY_LEVEL.map((level) => (
@@ -56,7 +56,7 @@ export const CategoryCard = ({ categoryId, name }: CategoryCardProps) => {
             Type
           </label>
           <select
-            className="block w-full rounded-lg  bg-gray-50 p-2.5 text-sm text-gray-900 focus-visible:outline-none "
+            className="block w-full rounded-lg bg-gray-50  p-2.5 text-sm text-gray-900 focus-visible:outline-none max-sm:p-3 "
             defaultValue={questionsType}
             onChange={handleQuestionsTypeChange}>
             {QUESTION_TYPE.map((type) => (

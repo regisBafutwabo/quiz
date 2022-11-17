@@ -2,7 +2,7 @@
 
 ## Features
 
-- [ ] The user starts the quiz by clicking the '퀴즈 풀기' button
+- [x] The user starts the quiz by clicking the '퀴즈 풀기' button
 - [ ] The user can select one of the 4 answers
 - [ ] The user will be able to see the next question after selecting an answer
 

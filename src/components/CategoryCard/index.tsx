@@ -21,7 +21,7 @@ export const CategoryCard = ({ categoryId, name }: CategoryCardProps) => {
   };
 
   const handleDifficultyChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setDifficultyType(event.target.value);
+    setDifficultyType(event.target.value.toLowerCase());
   };
 
   const handleQuestionsTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {

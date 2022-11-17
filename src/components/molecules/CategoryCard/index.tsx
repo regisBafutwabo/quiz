@@ -2,6 +2,8 @@ import { ChangeEvent, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
+import { QuizService } from "../../../services/Quiz/Quiz.service";
+import { useStore } from "../../../store";
 import { Select, StartButton } from "../../atoms";
 import {
   CategoryCardProps,
@@ -12,10 +14,16 @@ import {
 export const CategoryCard = ({ categoryId, name }: CategoryCardProps) => {
   const navigate = useNavigate();
 
+  const { setToken, token } = useStore();
+
   const [questionsType, setQuestionsType] = useState<string>("any");
   const [difficultyType, setDifficultyType] = useState<string>("any");
 
-  const goToQuiz = () => {
+  const goToQuiz = async () => {
+    const newToken = await QuizService.generateToken();
+    setToken(newToken);
+    console.log("token", token);
+
     navigate(
       `/quiz/${categoryId}?difficulty=${difficultyType}&type=${questionsType}`
     );

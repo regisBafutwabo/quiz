@@ -14,7 +14,8 @@ export const Select = ({
       <select
         className="block w-full rounded-lg  bg-gray-50 p-2.5 text-sm text-gray-900 focus-visible:outline-none max-sm:p-3"
         defaultValue={defaultValue}
-        onChange={onChange}>
+        onChange={onChange}
+      >
         {options.map((level) => (
           <option key={level.key} value={level.value}>
             {level.value}

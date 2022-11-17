@@ -43,7 +43,8 @@ export const CategoryCard = ({ categoryId, name }: CategoryCardProps) => {
           <select
             className="block w-full rounded-lg  bg-gray-50 p-2.5 text-sm text-gray-900 focus-visible:outline-none max-sm:p-3"
             defaultValue={difficultyType}
-            onChange={handleDifficultyChange}>
+            onChange={handleDifficultyChange}
+          >
             {DIFFICULTY_LEVEL.map((level) => (
               <option key={level.key} value={level.value}>
                 {level.value}
@@ -58,7 +59,8 @@ export const CategoryCard = ({ categoryId, name }: CategoryCardProps) => {
           <select
             className="block w-full rounded-lg bg-gray-50  p-2.5 text-sm text-gray-900 focus-visible:outline-none max-sm:p-3 "
             defaultValue={questionsType}
-            onChange={handleQuestionsTypeChange}>
+            onChange={handleQuestionsTypeChange}
+          >
             {QUESTION_TYPE.map((type) => (
               <option key={type.key} value={type.key}>
                 {type.value}
@@ -70,7 +72,8 @@ export const CategoryCard = ({ categoryId, name }: CategoryCardProps) => {
       <div className="flex items-center justify-center max-sm:mt-4 max-sm:w-full sm:w-1/4">
         <button
           onClick={goToQuiz}
-          className="rounded-md bg-white px-1 py-2 font-bold text-pink-400  hover:bg-pink-400 hover:text-white max-sm:w-full max-sm:py-3 sm:px-8 sm:py-3">
+          className="rounded-md bg-white px-1 py-2 font-bold text-pink-400  hover:bg-pink-400 hover:text-white max-sm:w-full max-sm:py-3 sm:px-8 sm:py-3"
+        >
           퀴즈 풀기
         </button>
       </div>

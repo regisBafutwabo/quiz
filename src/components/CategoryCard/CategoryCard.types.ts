@@ -13,7 +13,7 @@ export const DIFFICULTY_LEVEL = [
   { key: "any", value: "Any" },
   { key: "easy", value: "Easy" },
   { key: "medium", value: "Medium" },
-  { key: "high", value: "High" },
+  { key: "hard", value: "Hard" },
 ];
 export const QUESTION_TYPE = [
   { key: "any", value: "Any" },

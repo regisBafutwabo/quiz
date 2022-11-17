@@ -60,12 +60,12 @@ export const Quiz = () => {
     <>
       <Helmet>
         <title>
-          귀즈 - {decodingText(questions[0].category || "Loading...")}
+          귀즈 - {decodingText(questions[0]?.category || "Loading...")}
         </title>
       </Helmet>
       <div>
         <span className=" text-2xl font-bold text-pink-400">
-          Category: {decodingText(questions[0].category || "Loading...")}
+          Category: {decodingText(questions[0]?.category || "Loading...")}
         </span>
       </div>
       <div className="mt-8">

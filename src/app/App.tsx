@@ -1,6 +1,10 @@
+import { useEffect } from "react";
+
+import { initializeApp } from "firebase/app";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { StandardTemplate } from "../components/templates/Standard/Standard";
+import { firebaseConfig } from "../constants/firebase";
 import { Error } from "../pages/Error";
 import { Home } from "../pages/Home";
 import { Quiz } from "../pages/Quiz";
@@ -31,6 +35,10 @@ const router = createBrowserRouter(
 );
 
 function App() {
+  useEffect(() => {
+    initializeApp(firebaseConfig);
+  }, []);
+
   return (
     <StandardTemplate>
       <RouterProvider router={router} />

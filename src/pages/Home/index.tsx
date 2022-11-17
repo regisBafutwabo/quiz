@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { useLoaderData } from "react-router-dom";
 
-import { CategoryCard } from "../../components/CategoryCard";
+import { CategoryCard } from "../../components/molecules/CategoryCard";
 import { CategoryType } from "../../typings/trivia";
 
 export const Home = () => {

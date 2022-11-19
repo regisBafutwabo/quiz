@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
+import { Skeleton } from "../../components/atoms/Skeleton";
 import { QuestionCard } from "../../components/molecules";
 import { QuizService } from "../../services/Quiz/Quiz.service";
 import { useStore } from "../../store";
@@ -65,7 +66,7 @@ export const Quiz = () => {
       </Helmet>
       <div>
         <span className=" text-2xl font-bold text-pink-400">
-          Category: {decodingText(questions[0]?.category || "Loading...")}
+          Category: {decodingText(questions[0]?.category)}
         </span>
       </div>
       <div className="mt-8">
@@ -80,7 +81,7 @@ export const Quiz = () => {
               current={questionNumber}
             />
           ))}
-        {loading && "Loading..."}
+        {loading && <Skeleton />}
       </div>
     </>
   );

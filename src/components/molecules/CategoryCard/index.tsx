@@ -3,38 +3,33 @@ import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { QuizService } from "../../../services/Quiz/Quiz.service";
-import { useStore } from "../../../store";
-import { Select, StartButton } from "../../atoms";
-import {
-  CategoryCardProps,
-  DIFFICULTY_LEVEL,
-  QUESTION_TYPE,
-} from "./CategoryCard.types";
+import { useTokenStore } from "../../../store";
+import { MainButton, Select } from "../../atoms";
+import { CategoryCardProps } from "./CategoryCard.types";
+
+const DIFFICULTY_LEVEL = [
+  { key: "any", value: "Any" },
+  { key: "easy", value: "Easy" },
+  { key: "medium", value: "Medium" },
+  { key: "hard", value: "Hard" },
+];
 
 export const CategoryCard = ({ categoryId, name }: CategoryCardProps) => {
   const navigate = useNavigate();
 
-  const { setToken, token } = useStore();
+  const { setToken } = useTokenStore();
 
-  const [questionsType, setQuestionsType] = useState<string>("any");
   const [difficultyType, setDifficultyType] = useState<string>("any");
 
   const goToQuiz = async () => {
     const newToken = await QuizService.generateToken();
     setToken(newToken);
-    console.log("token", token);
 
-    navigate(
-      `/quiz/${categoryId}?difficulty=${difficultyType}&type=${questionsType}`
-    );
+    navigate(`/quiz/${categoryId}?difficulty=${difficultyType}`);
   };
 
   const handleDifficultyChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setDifficultyType(event.target.value.toLowerCase());
-  };
-
-  const handleQuestionsTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setQuestionsType(event.target.value);
   };
 
   return (
@@ -51,15 +46,9 @@ export const CategoryCard = ({ categoryId, name }: CategoryCardProps) => {
           onChange={handleDifficultyChange}
           label="Difficulty"
         />
-        <Select
-          options={QUESTION_TYPE}
-          defaultValue={questionsType}
-          onChange={handleQuestionsTypeChange}
-          label="Type"
-        />
       </div>
       <div className="flex items-center justify-center max-sm:mt-8 max-sm:w-full sm:w-1/4">
-        <StartButton label="퀴즈 풀기" onClick={goToQuiz} />
+        <MainButton label="퀴즈 풀기" onClick={goToQuiz} />
       </div>
     </div>
   );

@@ -1,4 +1,6 @@
 export type AnswerButtonProps = {
   answer: string;
-  onClick: () => Promise<void>;
+  onClick: () => void;
+  correctAnswer?: boolean;
+  status: "SOLVED" | "UNSOLVED";
 };

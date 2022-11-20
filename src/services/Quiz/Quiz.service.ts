@@ -23,27 +23,22 @@ export class QuizService {
     }
   }
 
-  static async getQuiz({ categoryId, difficulty, token }: getQuizArgs) {
-    try {
-      const response = await fetch(
-        `${QUIZ_API}?amount=1&category=${categoryId}${
-          difficulty ? `&difficulty=${difficulty}` : ""
-        }&type=multiple&token=${token}&encode=url3986`
-      );
+  static async getQuiz(argument: getQuizArgs) {
+    const { difficulty, token, categoryId } = argument;
 
-      const data = await response.json();
+    const response = await fetch(
+      `${QUIZ_API}?amount=1&category=${categoryId}${
+        difficulty ? `&difficulty=${difficulty}` : ""
+      }&type=multiple&token=${token}&encode=url3986`
+    );
 
-      if (data.response_code === 0) {
-        return data.results;
-      } else {
-        const errorMessage = getErrorMessage(data.response_code);
-        throw errorMessage;
-      }
-    } catch (error) {
-      console.error("ERROR in getQuiz:", error);
-      if (error instanceof Error) {
-        throw new Error(error.message);
-      }
+    const data = await response.json();
+
+    if (data.response_code === 0) {
+      return data.results;
+    } else {
+      const errorMessage = getErrorMessage(data.response_code);
+      throw errorMessage;
     }
   }
 

@@ -22,7 +22,7 @@ const router = createBrowserRouter(
       path: "/result",
       element: <Result />,
     },
-    { path: "*", element: <Error type="404" /> },
+    { path: "*", element: <Error /> },
   ],
   { basename: "/" }
 );

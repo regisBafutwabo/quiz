@@ -12,6 +12,7 @@ export const QuestionCard = ({
   onSolve,
 }: QuestionCardProps) => {
   const [status, setStatus] = useState<"SOLVED" | "UNSOLVED">("UNSOLVED");
+
   const answers = useMemo(
     () => [...question.incorrect_answers, question.correct_answer],
     [question]

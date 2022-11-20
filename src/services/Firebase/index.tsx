@@ -23,17 +23,13 @@ class FirebaseService {
    * @returns - The document related to the token id of the current user
    */
   public async getAnswers(userToken: string) {
-    try {
-      const answersDoc = doc(this.db, "answers", userToken);
-      const docSnap = await getDoc(answersDoc);
+    const answersDoc = doc(this.db, "answers", userToken);
+    const docSnap = await getDoc(answersDoc);
 
-      if (docSnap.exists()) {
-        return docSnap.data();
-      }
-      throw new Error("Document not Found");
-    } catch (error) {
-      console.error(error);
+    if (docSnap.exists()) {
+      return docSnap.data();
     }
+    throw new Error("Document not Found");
   }
 
   /**
@@ -44,7 +40,7 @@ class FirebaseService {
     const answersCollection = collection(this.db, "answers");
 
     await setDoc(doc(answersCollection, data.userToken), {
-      questions: data.answers,
+      answers: data.answers,
       id: data.userToken,
       usedTime: data.timeUsed,
     });

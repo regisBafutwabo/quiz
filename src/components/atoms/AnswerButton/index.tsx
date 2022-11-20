@@ -24,7 +24,8 @@ export const AnswerButton = ({
         status === "UNSOLVED"
           ? "bg-white text-blue-500 hover:bg-pink-500 hover:text-white"
           : buttonColor
-      } p-4 font-bold  shadow-lg  max-sm:w-full sm:m-3 sm:w-1/3`}>
+      } p-4 font-bold  shadow-lg  max-sm:w-full sm:m-3 sm:w-1/3`}
+    >
       {decodeText(answer)}
     </button>
   );

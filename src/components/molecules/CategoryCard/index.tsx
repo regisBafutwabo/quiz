@@ -48,7 +48,11 @@ export const CategoryCard = ({ categoryId, name }: CategoryCardProps) => {
         />
       </div>
       <div className="flex items-center justify-center max-sm:mt-8 max-sm:w-full sm:w-1/4">
-        <MainButton label="퀴즈 풀기" onClick={goToQuiz} />
+        <MainButton
+          label="퀴즈 풀기"
+          id={`solve-quiz-button-${categoryId}`}
+          onClick={goToQuiz}
+        />
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ export const Error = () => {
   return (
     <div className="my-24 flex-col content-center items-center justify-center space-y-10 text-center">
       <img src={Image} className=" mx-auto h-96 w-96" />
-      <MainButton isBlue onClick={goHome} label="Home" />
+      <MainButton isBlue id="home-button" onClick={goHome} label="Home" />
     </div>
   );
 };

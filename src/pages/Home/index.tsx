@@ -12,7 +12,10 @@ export const Home = () => {
       <Helmet>
         <title>귀즈 - Home</title>
       </Helmet>
-      <p className="text-pink- text-4xl font-bold text-pink-400">{`Let's Play`}</p>
+      <p
+        className="text-pink- text-4xl font-bold text-pink-400"
+        data-testid="home-title"
+      >{`Let's Play`}</p>
       <div className="mt-4 flex-col justify-around px-4">
         {loadedData?.categories &&
           loadedData.categories?.map((category) => (

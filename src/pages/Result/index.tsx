@@ -85,10 +85,16 @@ export const Result = () => {
           <div className="h-10 w-full rounded-xl bg-red-500">
             <div
               className="h-10 rounded-xl bg-green-500 p-0.5 text-center text-xs font-medium text-blue-100"
-              style={{ width: `${correctAnswer * 10}%` }}></div>
+              style={{ width: `${correctAnswer * 10}%` }}
+            ></div>
           </div>
           <div className="my-8 text-center">
-            <MainButton onClick={onClick} isBlue label="Go Home" />
+            <MainButton
+              onClick={onClick}
+              id="go-home-button"
+              isBlue
+              label="Go Home"
+            />
           </div>
         </>
       )}

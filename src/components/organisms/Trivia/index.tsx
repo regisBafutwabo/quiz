@@ -67,7 +67,6 @@ export const Trivia = (props: TriviaProps) => {
         navigate("/result", { replace: true });
       } else {
         await getQuiz();
-        console.log("Number", questionNumber);
         setQuestionNumber((previous) => previous + 1);
         setLoading(false);
       }

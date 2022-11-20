@@ -4,5 +4,5 @@ export type QuestionCardProps = {
   question: QuestionType;
   total: number;
   current: number;
-  onSolve: () => Promise<void>;
+  onSolve: (answer: string) => void;
 };

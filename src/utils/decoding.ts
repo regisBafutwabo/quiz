@@ -1,4 +1,4 @@
-export const decodingText = (text: string) => {
+export const decodeText = (text: string) => {
   if (text !== "") {
     return decodeURIComponent(text);
   }

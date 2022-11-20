@@ -11,3 +11,8 @@ export type QuestionType = {
   question: string;
   type: string;
 };
+
+export type AnswerType = {
+  correctAnswer: number;
+  incorrectAnswer: number;
+};

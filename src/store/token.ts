@@ -6,7 +6,7 @@ interface TokenState {
   setToken: (token: string) => void;
 }
 
-export const useStore = create<TokenState>()(
+export const useTokenStore = create<TokenState>()(
   persist(
     (set) => ({
       token: "",

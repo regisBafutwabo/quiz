@@ -1,87 +1,68 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { Helmet } from "react-helmet-async";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
-import { QuestionCard } from "../../components/molecules";
+import { Trivia } from "../../components/organisms/Trivia";
 import { QuizService } from "../../services/Quiz/Quiz.service";
-import { useStore } from "../../store";
+import { useTimerStore, useTokenStore } from "../../store";
 import { QuestionType } from "../../typings/trivia";
-import { decodingText } from "../../utils/decoding";
+import { decodeText } from "../../utils/decoding";
 
 export const Quiz = () => {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const { token } = useStore();
+
+  const { token } = useTokenStore();
+  const { setTime } = useTimerStore();
 
   const [questions, setQuestions] = useState<QuestionType[]>([]);
-  const [questionNumber, setQuestionNumber] = useState<number>(1);
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const getQuiz = useCallback(async () => {
     const difficulty = searchParams.get("difficulty");
-    const type = searchParams.get("type");
 
     if (id) {
       try {
         const data = await QuizService.getQuiz({
           categoryId: id,
           difficulty: difficulty !== "any" ? difficulty : null,
-          type: type !== "any" ? type : null,
           token: token,
         });
+
         setQuestions(data);
+        setLoading(false);
       } catch (error) {
-        setErrorMessage((error as Error).message);
+        setErrorMessage(error as string);
+        setLoading(false);
       }
     }
   }, [searchParams, id]);
 
-  const solveQuestion = async () => {
-    if (questionNumber === 10) {
-      navigate("/result", { replace: true });
-    } else {
-      setLoading(true);
-
-      await getQuiz();
-      setQuestionNumber(questionNumber + 1);
-
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
     getQuiz();
+    setTime(new Date().toString());
   }, []);
 
   return (
     <>
       <Helmet>
         <title>
-          귀즈 - {decodingText(questions[0]?.category || "Loading...")}
+          귀즈 - {decodeText(questions[0]?.category || "Loading...")}
         </title>
       </Helmet>
-      <div>
-        <span className=" text-2xl font-bold text-pink-400">
-          Category: {decodingText(questions[0]?.category || "Loading...")}
-        </span>
+
+      <div className=" my-4">
+        <span className="text-xl text-red-500">{errorMessage}</span>
       </div>
-      <div className="mt-8">
-        {questions.length &&
-          !loading &&
-          questions.map((question) => (
-            <QuestionCard
-              onSolve={solveQuestion}
-              key={question.question}
-              question={question}
-              total={10}
-              current={questionNumber}
-            />
-          ))}
-        {loading && "Loading..."}
-      </div>
+      <Trivia
+        loading={loading}
+        setLoading={setLoading}
+        setErrorMessage={setErrorMessage}
+        questions={questions}
+        getQuiz={getQuiz}
+      />
     </>
   );
 };

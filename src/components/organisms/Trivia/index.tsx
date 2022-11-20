@@ -9,7 +9,6 @@ import { AnswerType } from "../../../typings/trivia";
 import { decodeText } from "../../../utils/decoding";
 import { CalculateTimeUsed } from "../../../utils/time";
 import { MainButton } from "../../atoms";
-import { Skeleton } from "../../atoms/Skeleton";
 import { QuestionCard } from "../../molecules";
 import { TriviaProps } from "./Trivia.types";
 

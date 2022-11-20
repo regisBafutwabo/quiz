@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -48,7 +48,8 @@ export const Trivia = (props: TriviaProps) => {
     setShowNextButton(true);
   };
 
-  const goToNextQuestion = async () => {
+  const goToNextQuestion = async (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     setShowNextButton(false);
     setLoading(true);
 
@@ -66,8 +67,8 @@ export const Trivia = (props: TriviaProps) => {
         navigate("/result", { replace: true });
       } else {
         await getQuiz();
-
-        setQuestionNumber(questionNumber + 1);
+        console.log("Number", questionNumber);
+        setQuestionNumber((previous) => previous + 1);
         setLoading(false);
       }
     } catch (error) {
@@ -78,6 +79,7 @@ export const Trivia = (props: TriviaProps) => {
 
   return (
     <div className="mt-8">
+      {loading && <Skeleton />}
       {questions[0] &&
         !loading &&
         questions.map((question) => (
@@ -89,7 +91,6 @@ export const Trivia = (props: TriviaProps) => {
             current={questionNumber}
           />
         ))}
-      {loading && <Skeleton />}
 
       {showNextButton && (
         <div className="flex content-end items-center justify-end space-x-2 max-sm:flex-col max-sm:space-y-2">
@@ -99,7 +100,12 @@ export const Trivia = (props: TriviaProps) => {
               <img src={SadFace} className="h-10 w-10" />
             </div>
           )}
-          <MainButton label="Next" isBlue onClick={goToNextQuestion} />
+          <MainButton
+            label="Next"
+            isBlue
+            id="next-question-button"
+            onClick={goToNextQuestion}
+          />
         </div>
       )}
     </div>

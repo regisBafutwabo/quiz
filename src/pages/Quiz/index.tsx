@@ -13,7 +13,7 @@ export const Quiz = () => {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
 
-  const { token } = useTokenStore();
+  const { token, setToken } = useTokenStore();
   const { setTime } = useTimerStore();
 
   const [questions, setQuestions] = useState<QuestionType[]>([]);
@@ -21,8 +21,12 @@ export const Quiz = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const getQuiz = useCallback(async () => {
-    const difficulty = searchParams.get("difficulty");
+    if (!token) {
+      const newToken = await QuizService.generateToken();
+      setToken(newToken);
+    }
 
+    const difficulty = searchParams.get("difficulty");
     if (id) {
       try {
         const data = await QuizService.getQuiz({
@@ -53,16 +57,21 @@ export const Quiz = () => {
         </title>
       </Helmet>
 
-      <div className=" my-4">
-        <span className="text-xl text-red-500">{errorMessage}</span>
-      </div>
-      <Trivia
-        loading={loading}
-        setLoading={setLoading}
-        setErrorMessage={setErrorMessage}
-        questions={questions}
-        getQuiz={getQuiz}
-      />
+      {errorMessage && (
+        <div className="my-4">
+          <span className="text-xl text-red-500">{errorMessage}</span>
+        </div>
+      )}
+
+      {questions && (
+        <Trivia
+          loading={loading}
+          setLoading={setLoading}
+          setErrorMessage={setErrorMessage}
+          questions={questions}
+          getQuiz={getQuiz}
+        />
+      )}
     </>
   );
 };

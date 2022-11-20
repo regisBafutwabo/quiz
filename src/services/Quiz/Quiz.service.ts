@@ -25,6 +25,9 @@ export class QuizService {
 
   static async getQuiz(argument: getQuizArgs) {
     const { difficulty, token, categoryId } = argument;
+    if (!token) {
+      throw new Error("No User Token found!");
+    }
 
     const response = await fetch(
       `${QUIZ_API}?amount=1&category=${categoryId}${

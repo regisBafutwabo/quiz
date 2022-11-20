@@ -20,6 +20,7 @@ export const AnswerButton = ({
   return (
     <button
       onClick={onClick}
+      data-testid={`answer-button`}
       className={` my-3 flex justify-between rounded-xl ${
         status === "UNSOLVED"
           ? "bg-white text-blue-500 hover:bg-pink-500 hover:text-white"

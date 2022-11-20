@@ -88,7 +88,12 @@ export const Result = () => {
               style={{ width: `${correctAnswer * 10}%` }}></div>
           </div>
           <div className="my-8 text-center">
-            <MainButton onClick={onClick} isBlue label="Go Home" />
+            <MainButton
+              onClick={onClick}
+              id="go-home-button"
+              isBlue
+              label="Go Home"
+            />
           </div>
         </>
       )}

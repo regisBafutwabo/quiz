@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams, useSearchParams } from "react-router-dom";
 
+import { Skeleton } from "../../components/atoms/Skeleton";
 import { Trivia } from "../../components/organisms/Trivia";
 import { QuizService } from "../../services/Quiz/Quiz.service";
 import { useTimerStore, useTokenStore } from "../../store";
@@ -22,7 +23,6 @@ export const Quiz = () => {
 
   const getQuiz = useCallback(async () => {
     const difficulty = searchParams.get("difficulty");
-
     if (id) {
       try {
         const data = await QuizService.getQuiz({
@@ -53,16 +53,20 @@ export const Quiz = () => {
         </title>
       </Helmet>
 
-      <div className=" my-4">
+      <div className="my-4">
         <span className="text-xl text-red-500">{errorMessage}</span>
       </div>
-      <Trivia
-        loading={loading}
-        setLoading={setLoading}
-        setErrorMessage={setErrorMessage}
-        questions={questions}
-        getQuiz={getQuiz}
-      />
+      {loading ? (
+        <Skeleton />
+      ) : (
+        <Trivia
+          loading={loading}
+          setLoading={setLoading}
+          setErrorMessage={setErrorMessage}
+          questions={questions}
+          getQuiz={getQuiz}
+        />
+      )}
     </>
   );
 };

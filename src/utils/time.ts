@@ -13,6 +13,6 @@ export const CalculateTimeUsed = (startTime: string) => {
   const time = `${hourDifference > 0 ? `${hourDifference} hours,` : ""} ${
     minuteDifference > 0 ? `${minuteDifference} minutes,` : ""
   } ${secondsDifference} seconds`;
-  console.log("start", startTime, firstDate);
+
   return time;
 };

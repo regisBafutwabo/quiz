@@ -89,7 +89,6 @@ export const Trivia = (props: TriviaProps) => {
             current={questionNumber}
           />
         ))}
-      {loading && <Skeleton />}
 
       {showNextButton && (
         <div className="flex content-end items-center justify-end space-x-2 max-sm:flex-col max-sm:space-y-2">
@@ -99,7 +98,12 @@ export const Trivia = (props: TriviaProps) => {
               <img src={SadFace} className="h-10 w-10" />
             </div>
           )}
-          <MainButton label="Next" isBlue onClick={goToNextQuestion} />
+          <MainButton
+            label="Next"
+            isBlue
+            id="next-question-button"
+            onClick={goToNextQuestion}
+          />
         </div>
       )}
     </div>

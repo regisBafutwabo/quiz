@@ -5,7 +5,8 @@ export const StandardTemplate = ({ children }: { children: ReactNode }) => {
     <div
       style={{ padding: 16 }}
       className="mx-auto max-w-7xl"
-      data-testid="template">
+      data-testid="template"
+    >
       {children}
     </div>
   );

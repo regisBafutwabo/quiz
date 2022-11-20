@@ -22,6 +22,7 @@ import "./commands";
 declare global {
   namespace Cypress {
     interface Chainable<Subject = any> {
+      StartQuiz(): Chainable<any>;
       getBySel(selector: string, args?: any): Chainable<any>;
     }
   }

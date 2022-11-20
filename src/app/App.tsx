@@ -18,6 +18,7 @@ export const routesConfig = [
   {
     path: "/quiz/:id",
     element: <Quiz />,
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/result",

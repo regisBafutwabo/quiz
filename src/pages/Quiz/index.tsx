@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams, useSearchParams } from "react-router-dom";
 
-import { Skeleton } from "../../components/atoms/Skeleton";
 import { Trivia } from "../../components/organisms/Trivia";
 import { QuizService } from "../../services/Quiz/Quiz.service";
 import { useTimerStore, useTokenStore } from "../../store";
@@ -14,7 +13,7 @@ export const Quiz = () => {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
 
-  const { token } = useTokenStore();
+  const { token, setToken } = useTokenStore();
   const { setTime } = useTimerStore();
 
   const [questions, setQuestions] = useState<QuestionType[]>([]);
@@ -22,6 +21,11 @@ export const Quiz = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const getQuiz = useCallback(async () => {
+    if (!token) {
+      const newToken = await QuizService.generateToken();
+      setToken(newToken);
+    }
+
     const difficulty = searchParams.get("difficulty");
     if (id) {
       try {
@@ -53,12 +57,13 @@ export const Quiz = () => {
         </title>
       </Helmet>
 
-      <div className="my-4">
-        <span className="text-xl text-red-500">{errorMessage}</span>
-      </div>
-      {loading ? (
-        <Skeleton />
-      ) : (
+      {errorMessage && (
+        <div className="my-4">
+          <span className="text-xl text-red-500">{errorMessage}</span>
+        </div>
+      )}
+
+      {questions && (
         <Trivia
           loading={loading}
           setLoading={setLoading}

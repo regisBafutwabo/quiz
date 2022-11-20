@@ -1,7 +1,7 @@
 describe("In the Quiz Page", () => {
-  //   beforeEach(() => {
-
-  //   });
+  beforeEach(() => {
+    cy.StartQuiz();
+  });
 
   it("You Should be able to see the QuestionCard Component", () => {
     cy.getBySel("question-card").should("be.visible");
@@ -17,9 +17,7 @@ describe("In the Quiz Page", () => {
     cy.getBySel("answer-button").should("not.have.class", "bg-white");
   });
 
-  it.only("Clicking on the Next button should take you the next question", () => {
-    cy.visit("/quiz/9?difficulty=any");
-
+  it("Clicking on the Next button should take you the next question", () => {
     cy.getBySel("answer-button").eq(0).click();
     cy.getBySel("next-question-button").click();
     cy.getBySel("answer-button").eq(0).should("have.class", "bg-white");

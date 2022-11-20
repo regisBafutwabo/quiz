@@ -35,6 +35,14 @@
 //     }
 //   }
 // }
+Cypress.Commands.add("StartQuiz", () => {
+  cy.visit("/");
+  cy.getBySel("solve-quiz-button-9").click();
+
+  cy.location().should((location) => {
+    expect(location.pathname).to.contain("/quiz/9");
+  });
+});
 
 Cypress.Commands.add("getBySel", (selector, ...args) => {
   return cy.get(`[data-testid=${selector}]`, ...args);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -9,6 +9,7 @@ import { AnswerType } from "../../../typings/trivia";
 import { decodeText } from "../../../utils/decoding";
 import { CalculateTimeUsed } from "../../../utils/time";
 import { MainButton } from "../../atoms";
+import { Skeleton } from "../../atoms/Skeleton";
 import { QuestionCard } from "../../molecules";
 import { TriviaProps } from "./Trivia.types";
 
@@ -47,7 +48,8 @@ export const Trivia = (props: TriviaProps) => {
     setShowNextButton(true);
   };
 
-  const goToNextQuestion = async () => {
+  const goToNextQuestion = async (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     setShowNextButton(false);
     setLoading(true);
 
@@ -65,8 +67,8 @@ export const Trivia = (props: TriviaProps) => {
         navigate("/result", { replace: true });
       } else {
         await getQuiz();
-
-        setQuestionNumber(questionNumber + 1);
+        console.log("Number", questionNumber);
+        setQuestionNumber((previous) => previous + 1);
         setLoading(false);
       }
     } catch (error) {
@@ -77,6 +79,7 @@ export const Trivia = (props: TriviaProps) => {
 
   return (
     <div className="mt-8">
+      {loading && <Skeleton />}
       {questions[0] &&
         !loading &&
         questions.map((question) => (

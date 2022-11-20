@@ -27,13 +27,11 @@ export const QuestionCard = ({
   return (
     <div
       className="mb-4 rounded-xl bg-gradient-to-b from-cyan-500 to-blue-500 p-6 text-white shadow-lg"
-      data-testid="question-card"
-    >
+      data-testid="question-card">
       <div>
-        <span
+        <p
           className="font-semi-bold"
-          data-testid="current-question"
-        >{`Question ${current} of ${total}`}</span>
+          data-testid="current-question">{`Question ${current} of ${total}`}</p>
       </div>
       <div>
         <span className="text-2xl font-bold">

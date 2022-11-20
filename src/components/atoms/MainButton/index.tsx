@@ -9,7 +9,8 @@ export const MainButton = ({ label, onClick, isBlue, id }: MainButtonProps) => {
         isBlue
           ? "bg-blue-500 text-white hover:bg-blue-600"
           : "bg-white text-pink-400  hover:bg-pink-400 hover:text-white"
-      }`}>
+      }`}
+    >
       {label}
     </button>
   );

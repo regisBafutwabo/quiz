@@ -1,7 +1,6 @@
 import {
   CATEGORIES_API_LINK,
   QUIZ_API,
-  RESET_TOKEN,
   RETRIEVE_TOKEN,
 } from "../../constants/api";
 import { CategoryType } from "../../typings/trivia";
@@ -52,20 +51,6 @@ export class QuizService {
       const token = data?.token;
 
       return token;
-    } catch (error) {
-      if (error instanceof Error) {
-        throw new Error(error.message);
-      }
-    }
-  }
-
-  static async resetToken(token: string) {
-    try {
-      const response = await fetch(`${RESET_TOKEN}&token=${token}`);
-      const data = await response.json();
-      const newToken = data?.token;
-
-      return newToken;
     } catch (error) {
       if (error instanceof Error) {
         throw new Error(error.message);

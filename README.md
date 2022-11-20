@@ -18,6 +18,8 @@ First create and fill up the `.env` file by using the `.env.example` as a refere
      |── components             # contains the reusable components (Atomic Design Structure)
      |-- constants              # contains all the constants values that are used throughout the app
      |── pages                  # contains all the pages of the app
+     |-- services               # contains the business logic of the features
+     |-- store                  # contains zustand stores
      |── typings                # contains all the Typescript declaration files
      └── utils                  # contains all the extra helper function that can be used in the app
 

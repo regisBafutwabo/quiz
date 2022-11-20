@@ -23,12 +23,12 @@ export class QuizService {
     }
   }
 
-  static async getQuiz({ categoryId, difficulty, type, token }: getQuizArgs) {
+  static async getQuiz({ categoryId, difficulty, token }: getQuizArgs) {
     try {
       const response = await fetch(
         `${QUIZ_API}?amount=1&category=${categoryId}${
           difficulty ? `&difficulty=${difficulty}` : ""
-        }${type ? `&type=${type}` : ""}&token=${token}&encode=url3986`
+        }&type=multiple&token=${token}&encode=url3986`
       );
 
       const data = await response.json();

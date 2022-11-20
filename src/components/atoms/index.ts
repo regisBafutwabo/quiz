@@ -1,2 +1,4 @@
 export * from "./Select";
-export * from "./StartButton";
+export * from "./MainButton";
+export * from "./Select";
+export * from "./AnswerButton";

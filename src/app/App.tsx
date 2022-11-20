@@ -1,10 +1,6 @@
-import { useEffect } from "react";
-
-import { initializeApp } from "firebase/app";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { StandardTemplate } from "../components/templates/Standard/Standard";
-import { firebaseConfig } from "../constants/firebase";
 import { Error } from "../pages/Error";
 import { Home } from "../pages/Home";
 import { Quiz } from "../pages/Quiz";
@@ -17,17 +13,14 @@ const router = createBrowserRouter(
       path: "/",
       element: <Home />,
       loader: QuizService.getCategories,
-      errorElement: <Error type="404" />,
     },
     {
       path: "/quiz/:id",
       element: <Quiz />,
-      errorElement: <Error type="404" />,
     },
     {
       path: "/result",
       element: <Result />,
-      errorElement: <Error type="404" />,
     },
     { path: "*", element: <Error type="404" /> },
   ],
@@ -35,10 +28,6 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  useEffect(() => {
-    initializeApp(firebaseConfig);
-  }, []);
-
   return (
     <StandardTemplate>
       <RouterProvider router={router} />

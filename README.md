@@ -1,6 +1,6 @@
 # Quiz(퀴즈)
 
-## How ro run
+## How to run
 
 First create and fill up the `.env` file by using the `.env.example` as a reference
 
@@ -9,6 +9,14 @@ First create and fill up the `.env` file by using the `.env.example` as a refere
 ## How to test
 
 `npx cypress run`
+
+## Packages
+- React 18
+- React Router v6
+- Tailwind
+- zustand
+- Firebase
+- Cypress
 
 ## Folder Structure
 

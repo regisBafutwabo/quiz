@@ -18,7 +18,7 @@ export const ErrorBoundary = () => {
       <div>
         <span className="text-xl font-bold">Error Details: </span>
         <span className="text-xl font-semibold text-red-500">
-          {(error as Error).message}
+          {(error as Error)?.message || (error as string)}
         </span>
       </div>
     </div>

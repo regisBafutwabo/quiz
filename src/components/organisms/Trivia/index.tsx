@@ -3,7 +3,7 @@ import { MouseEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import SadFace from "../../../assets/images/sadFace.svg";
-import firebaseService from "../../../services/Firebase";
+import FirebaseService from "../../../services/Firebase/Firebase.service";
 import { useTimerStore, useTokenStore } from "../../../store";
 import { AnswerType } from "../../../typings/trivia";
 import { decodeText } from "../../../utils/decoding";
@@ -57,7 +57,7 @@ export const Trivia = (props: TriviaProps) => {
       if (questionNumber === 10) {
         const timeUsed = CalculateTimeUsed(time);
 
-        await firebaseService.setAnswers({
+        await FirebaseService.setAnswers({
           userToken: token,
           timeUsed: timeUsed,
           answers,

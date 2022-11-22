@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { Helmet } from "react-helmet-async";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useLoaderData, useParams, useSearchParams } from "react-router-dom";
 
 import { Trivia } from "../../components/organisms/Trivia";
 import { QuizService } from "../../services/Quiz/Quiz.service";
@@ -10,42 +10,36 @@ import { QuestionType } from "../../typings/trivia";
 import { decodeText } from "../../utils/decoding";
 
 export const Quiz = () => {
+  const loadedData = useLoaderData() as QuestionType[];
+
   const { id } = useParams();
   const [searchParams] = useSearchParams();
 
-  const { token, setToken } = useTokenStore();
+  const { token } = useTokenStore();
   const { setTime } = useTimerStore();
 
-  const [questions, setQuestions] = useState<QuestionType[]>([]);
+  const [questions, setQuestions] = useState<QuestionType[]>(loadedData);
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const getQuiz = useCallback(async () => {
-    if (!token) {
-      const newToken = await QuizService.generateToken();
-      setToken(newToken);
-    }
-
     const difficulty = searchParams.get("difficulty");
-    if (id) {
-      try {
-        const data = await QuizService.getQuiz({
-          categoryId: id,
-          difficulty: difficulty !== "any" ? difficulty : null,
-          token: token,
-        });
+    try {
+      const data = await QuizService.getQuiz({
+        categoryId: id as string,
+        difficulty: difficulty !== "any" ? difficulty : null,
+        token: token,
+      });
 
-        setQuestions(data);
-        setLoading(false);
-      } catch (error) {
-        setErrorMessage(error as string);
-        setLoading(false);
-      }
+      setQuestions(data);
+      setLoading(false);
+    } catch (error) {
+      setErrorMessage(error as string);
+      setLoading(false);
     }
   }, [searchParams, id]);
 
   useEffect(() => {
-    getQuiz();
     setTime(new Date().toString());
   }, []);
 

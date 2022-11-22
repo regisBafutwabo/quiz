@@ -16,3 +16,9 @@ export type AnswerType = {
   correctAnswer: number;
   incorrectAnswer: number;
 };
+
+export type ResultType = {
+  answers: AnswerType;
+  id: string;
+  usedTime: string;
+};

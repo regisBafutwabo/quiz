@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "@types/numeral": "^2.0.2",
+    "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.43.0",
     "autoprefixer": "^10.4.13",

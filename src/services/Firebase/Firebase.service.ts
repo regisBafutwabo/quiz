@@ -8,17 +8,19 @@ import {
 } from "firebase/firestore/lite";
 
 import { firebaseConfig } from "../../constants/firebase";
+import { useTokenStore } from "../../store";
+import { ResultType } from "../../typings/trivia";
 import { SetAnswersArgs } from "./Firebase.types";
 
 /**
  * Class that takes care of all the Firebase functions needed for our app
  */
-class FirebaseService {
+class Firebase {
   app = initializeApp(firebaseConfig);
   db = getFirestore();
 
   /**
-   * Method that is used to fetch all the answers of the current user
+   * Method that is used to fetch the answers of the current user
    * @param userToken - The token Id of the current user which will be used as the document id in firestore
    * @returns - The document related to the token id of the current user
    */
@@ -45,8 +47,23 @@ class FirebaseService {
       usedTime: data.timeUsed,
     });
   }
+  /**
+   * Method that fetches the answers of the current user using SSR
+   * @returns - The document related to the token id of the current user
+   */
+  public async getAnswersOnServer() {
+    const token = useTokenStore.getState().token;
+
+    if (token) {
+      const result = (await FirebaseService.getAnswers(token)) as ResultType;
+
+      return result;
+    } else {
+      throw "No user found!";
+    }
+  }
 }
 
-const firebaseService = new FirebaseService();
+const FirebaseService = new Firebase();
 
-export default firebaseService;
+export default FirebaseService;

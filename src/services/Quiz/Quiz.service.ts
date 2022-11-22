@@ -1,8 +1,11 @@
+import { LoaderFunctionArgs } from "react-router-dom";
+
 import {
   CATEGORIES_API_LINK,
   QUIZ_API,
   RETRIEVE_TOKEN,
 } from "../../constants/api";
+import { useTokenStore } from "../../store";
 import { CategoryType } from "../../typings/trivia";
 import { getErrorMessage } from "../../utils/errors";
 import { getQuizArgs } from "./Quiz.types";
@@ -41,6 +44,30 @@ export class QuizService {
     } else {
       const errorMessage = getErrorMessage(data.response_code);
       throw errorMessage;
+    }
+  }
+
+  static async getQuizOnServer({ params, request }: LoaderFunctionArgs) {
+    const url = new URL(request.url);
+    let token = "";
+    token = useTokenStore.getState().token;
+
+    if (params.id) {
+      if (!token) {
+        token = await QuizService.generateToken();
+        useTokenStore.setState({ token: token });
+      }
+
+      const difficulty = url.searchParams.get("difficulty");
+      const data = await QuizService.getQuiz({
+        categoryId: params.id,
+        difficulty: difficulty !== "any" ? difficulty : null,
+        token: token,
+      });
+
+      return data;
+    } else {
+      throw "Please Select a category first";
     }
   }
 
